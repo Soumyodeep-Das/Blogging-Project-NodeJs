@@ -9,20 +9,33 @@
 <body>
     
     <%- include('./partials/nav') %>
-    <%= JSON.stringify(user) %>
-    <h1>Home Page</h1>
-    <div>
-        <% blogs.forEach(element => { %>
-        <div class="card" style="width: 18rem;">
-            <img src="<%= element.coverImageURL %>" class="card-img-top" alt="Cover Image">
-            <div class="card-body">
-            <h5 class="card-title"><%= element.title %></h5>
-            <p class="card-text"><%= element.body %></p>
-            <a href="/blog/<%= element._id %>" class="btn btn-primary">Read More</a>
-            </div>
+
+    <div class="container-fluid mt-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4">Explore Our Blogs</h1>
+            <p class="lead">Read the latest articles from our community</p>
         </div>
-        <% }) %>
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <% blogs.forEach(element => { %>
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img src="<%= element.coverImageURL %>" class="card-img-top" alt="Cover Image" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-center"><%= element.title %></h5>
+                            <p class="card-text text-muted text-center">
+                                <small>Posted on <%= new Date(element.createdAt).toLocaleDateString() %></small>
+                            </p>
+                            <div class="mt-auto text-center">
+                                <a href="/blog/<%= element._id %>" class="btn btn-primary btn-sm">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
     </div>
+
     <%- include('./partials/scripts') %>
 </body>
 

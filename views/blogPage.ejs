@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Blog Page</title>
+    <%- include('./partials/head') %>
+</head>
+
+<body style="margin-bottom: 20px;">
+
+    <%- include('./partials/nav') %>
+        <!-- <h1>Blog Page</h1> -->
+        <div class="container-fluid py-5">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <!-- Blog Cover Image -->
+                    <div class="cover-image text-center mb-4">
+                        <img src="<%= locals.blog.coverImageURL %>" alt="Cover Image"
+                            class="img-fluid rounded shadow-sm"
+                            style="max-width: 100%; height:auto; max-height: 400px; object-fit: cover;">
+                    </div>
+
+                    <!-- Blog Title -->
+                    <h1 class="card-title text-center mb-4 font-weight-bold text-primary">
+                        <%= locals.blog.title %>
+                    </h1>
+
+                    <!-- Author Section -->
+                    <div class="d-flex align-items-center mb-4">
+                        <img src="/images/profile2.png" alt="Profile Image"
+                            class="rounded-circle border border-primary shadow-sm"
+                            style="width: 60px; height: 60px; margin-right: 15px;">
+                        <h5 class="mb-0 font-weight-bold text-dark">
+                            <%= locals.blog.createdBy.fullName %>
+                        </h5>
+                    </div>
+
+                    <!-- Blog Content -->
+                    <div class="blog-content">
+                        <pre class="card-text text-justify" style="white-space: pre-wrap; font-size: 1.1rem;">
+                            <%= locals.blog.body %>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <h2>You Comment/Feedback</h2>
+            <% if (!locals.user) { %>
+                <%- include('./partials/loggedOutComment') %>
+                    <% } else { %>
+                        <%- include('./partials/loggedInComment') %>
+                            <% } %>
+                                <%- include('./partials/allComments') %>
+        </div>
+
+        <%- include('./partials/scripts') %>
+</body>
+
+</html>
