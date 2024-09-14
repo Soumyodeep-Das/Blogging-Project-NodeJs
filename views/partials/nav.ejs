@@ -10,29 +10,39 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Add Blog</a>
+        <% if (locals.user) { %>
+         <li class="nav-item"></li>
+          <a class="nav-link" href="/blog/add">Add Blog</a>
         </li>
-        <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li> -->
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown"></li>
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            S Das
+            <%= locals.user.fullName %>
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Log Out</a></li>
+            <li><a class="dropdown-item" href="/user/logout">Log Out</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
         </li>
+        
+        <% } else { %>
+          <li class="nav-item"></li>
+          <a class="nav-link" href="/user/signup">Sign Up</a>
+        </li>
+        <% } %>
+        <!-- <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li> -->
+        
       </ul>
     </div>
   </div>
 </nav>
 
 <% if (locals.error) { %>
-  <div class="alert alert-danger" role="alert">
-    <%= locals.error %>
+  <div class="container-fluid mt-4">
+    <div class="alert alert-danger" role="alert">
+      <%= locals.error %>
+    </div>
   </div>
   <% } %>
