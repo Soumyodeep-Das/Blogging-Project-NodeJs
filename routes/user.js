@@ -23,10 +23,15 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body
-    const user = User.matchPassword(email, password)
-
-    console.log(user)
-    return res.redirect('/')
+    try {
+        const token = await User.matchPasswordAndGenerateToken(email, password)
+    return res.cookie("token", token).redirect("/")
+    } catch (error) {
+        return res.render("login", {
+            error: "Invalid Email or Password",
+        })
+    }
+    
 })
 
 module.exports = router
