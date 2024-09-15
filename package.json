@@ -19,6 +19,7 @@
     "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
+    "@railway/cli": "^3.14.0",
     "nodemon": "^3.1.4"
   }
 }
